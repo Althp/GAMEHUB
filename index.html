@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Game Hub Oficial</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="O que vamos jogar?"
+          autocomplete="off"
+        />
+        <i
+          class="fas fa-times clear-icon"
+          id="clearBtn"
+          style="display: none"
+        ></i>
+      </div>
+    </header>
+
+    <section
+      class="recommendations-section"
+      id="dailyRecContainer"
+      style="display: none"
+    >
+      <h2 class="section-title"><i class="fas fa-fire"></i> Jogos do Dia</h2>
+      <div class="rec-grid" id="recGrid"></div>
+    </section>
+
+    <h2 class="section-title main-title">
+      <i class="fas fa-gamepad"></i> Todos os Jogos
+    </h2>
+    <main class="app-grid" id="gameContainer"></main>
+
+    <div id="noResults" class="no-results" style="display: none">
+      <i class="fas fa-ghost"></i>
+      <p>Nenhum jogo encontrado...</p>
+    </div>
+
+    <div id="gameModal" class="game-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span id="modalGameTitle">Nome do Jogo</span>
+          <div class="modal-controls">
+            <button
+              onclick="alternarTelaCheia()"
+              class="control-btn"
+              title="Tela Cheia"
+            >
+              <i class="fas fa-expand" id="fullscreenIcon"></i>
+            </button>
+            <button
+              onclick="fecharJogo()"
+              class="control-btn close-btn"
+              title="Fechar"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="gameTarget" class="game-target"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

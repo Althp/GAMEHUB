@@ -1,0 +1,378 @@
+/* =========================================
+   1. CONFIGURAÇÕES GERAIS
+   ========================================= */
+:root {
+  --bg-color: #0a0a0a; /* Fundo Preto */
+  --card-bg: #1c1c1e; /* Fundo Cinza App */
+  --text-color: #ffffff; /* Texto Branco */
+  --accent-color: #007aff; /* Azul Destaque */
+  --highlight: #ff9500; /* Laranja (Recomendados) */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* =========================================
+     2. CABEÇALHO E BUSCA
+     ========================================= */
+header {
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(20px);
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-box {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+}
+.search-icon,
+.clear-icon {
+  color: #888;
+}
+.clear-icon {
+  cursor: pointer;
+}
+.clear-icon:hover {
+  color: #fff;
+}
+
+/* =========================================
+     3. SEÇÕES E TÍTULOS
+     ========================================= */
+.section-title {
+  max-width: 1000px;
+  margin: 0 auto 10px auto;
+  padding: 0 20px;
+  font-size: 16px;
+  color: #ccc;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.main-title {
+  margin-top: 20px;
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+/* =========================================
+     4. ÁREA DE RECOMENDAÇÕES (Jogos do Dia)
+     ========================================= */
+.recommendations-section {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rec-grid {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  scrollbar-width: none;
+}
+.rec-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Destaque Laranja nos Recomendados */
+.rec-grid .icon-shape {
+  border: 2px solid var(--highlight);
+  box-shadow: 0 0 15px rgba(255, 149, 0, 0.15);
+}
+
+/* =========================================
+     5. GRADE DE JOGOS (PRINCIPAL)
+     ========================================= */
+.app-grid {
+  padding: 20px;
+  display: grid;
+  /* CELULAR: 3 Colunas Fixas */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+/* =========================================
+     6. ÍCONES (DESIGN SQUIRCLE)
+     ========================================= */
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  width: 80px;
+  animation: popIn 0.5s ease;
+  position: relative; /* Necessário para o botão de favorito */
+}
+
+.icon-shape {
+  width: 70px;
+  height: 70px; /* Tamanho Fixo Celular */
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden; /* CORTA IMAGEM GIGANTE */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 8px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.icon-shape img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* A MÁGICA: Preenche sem distorcer */
+}
+
+.app-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #e0e0e0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.app-icon:active .icon-shape {
+  transform: scale(0.95);
+  filter: brightness(0.7);
+}
+
+/* --- FAVORITOS (NOVO) --- */
+.fav-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #2c2c2e;
+  color: #555;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.fav-btn:hover {
+  transform: scale(1.1);
+}
+
+.fav-btn.is-favorite {
+  background: #fff;
+  color: #ff9500; /* Laranja/Dourado */
+  box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
+  border: none;
+}
+
+/* =========================================
+     7. AJUSTES PARA PC (Telas Maiores)
+     ========================================= */
+@media (min-width: 768px) {
+  .app-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 40px 20px;
+  }
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    overflow-x: visible;
+  }
+  .icon-shape {
+    width: 90px;
+    height: 90px;
+  }
+  .app-icon {
+    width: 100px;
+  }
+  .app-icon:hover .icon-shape {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* =========================================
+     8. MODAL (JANELA DO JOGO)
+     ========================================= */
+.game-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-content {
+  width: 100%;
+  height: 90%;
+  max-width: 1200px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  height: 45px;
+  background: #151515;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.game-target {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Garante que iframes e emuladores dentro do palco preencham 100% */
+.game-target iframe,
+#emulator-container {
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  display: block;
+}
+
+.modal-controls {
+  display: flex;
+  gap: 10px;
+}
+.control-btn {
+  background: #333;
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control-btn:hover {
+  background: #444;
+}
+.control-btn.close-btn {
+  background: #ff3b30;
+}
+.control-btn.close-btn:hover {
+  background: #ff453a;
+}
+#modalGameTitle {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+}
+
+/* =========================================
+     AJUSTES DE TELA CHEIA (NATIVO + MOBILE)
+     ========================================= */
+
+/* Regra unificada: Funciona com API nativa (:fullscreen) OU classe forçada (.fullscreen-active) */
+.modal-content:fullscreen,
+.modal-content.fullscreen-active {
+  width: 100vw !important;
+  height: 100vh !important;
+  border: none !important;
+  border-radius: 0 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: #000; /* Garante fundo preto */
+  padding: 0 !important;
+}
+
+/* ESCONDE O CABEÇALHO (A Mágica) */
+.modal-content:fullscreen .modal-header,
+.modal-content.fullscreen-active .modal-header {
+  display: none !important; /* Força o desaparecimento */
+}
+
+/* GARANTE QUE O JOGO OCUPE 100% */
+.modal-content:fullscreen .game-target,
+.modal-content.fullscreen-active .game-target {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+/* Ajuste para iframes */
+.modal-content:fullscreen iframe,
+.modal-content.fullscreen-active iframe,
+.modal-content:fullscreen #emulator-container,
+.modal-content.fullscreen-active #emulator-container {
+  width: 100vw !important;
+  height: 100vh !important;
+}
