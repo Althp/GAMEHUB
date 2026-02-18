@@ -1,0 +1,551 @@
+<html lang="en">
+  <head>
+    <title>Bomb It 3</title>
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Bomb and blast your enemies to smithereens in BOMB IT 3! Place bombs and take out opponents and enjoy all the different game modes."
+    />
+    <meta name="keywords" content="bomb,explosion,bomberman" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bomb It 3" />
+    <meta
+      property="og:description"
+      content="Bomb and blast your enemies to smithereens in BOMB IT 3! Place bombs and take out opponents and enjoy all the different game modes."
+    />
+    <meta
+      property="og:image"
+      content="https://img.gamedistribution.com/ec01b356fb374c15a165dca5f7da22e8-512x512.jpeg"
+    />
+    <meta
+      property="og:url"
+      content="https://html5.gamedistribution.com/ec01b356fb374c15a165dca5f7da22e8/"
+    />
+    <link
+      rel="canonical"
+      href="https://html5.gamedistribution.com/ec01b356fb374c15a165dca5f7da22e8/"
+    />
+    <link rel="manifest" href="manifest_1.5.18.json" />
+    <link rel="preconnect" href="https://html5.api.gamedistribution.com" />
+    <link rel="preconnect" href="https://game.api.gamedistribution.com" />
+    <link rel="preconnect" href="https://pm.gamedistribution.com" />
+    <script id="gamedistribution-jssdk" src="./scripts/main.min.js"></script>
+    <script type="text/javascript">
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register(`/sw_1.5.18.js`)
+          .then(function () {
+            console.log("SW registered...");
+          })
+          .catch((err) => {
+            console.log("SW not registered...", err.message);
+          });
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Game",
+        "name": "Bomb It 3",
+        "url": "https://html5.gamedistribution.com/ec01b356fb374c15a165dca5f7da22e8/",
+        "image": "https://img.gamedistribution.com/ec01b356fb374c15a165dca5f7da22e8-512x512.jpeg",
+        "description": "Bomb and blast your enemies to smithereens in BOMB IT 3! Place bombs and take out opponents and enjoy all the different game modes.",
+        "creator": {
+          "name": "Agame",
+          "url": "https://www.agame.com/game/bomb-it-3"
+        },
+        "publisher": {
+          "name": "GameDistribution",
+          "url": "https://gamedistribution.com/games/bomb-it-3"
+        },
+        "genre": ["bomb", "explosion", "bomberman"]
+      }
+    </script>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        overflow: hidden;
+        height: 100%;
+      }
+      #game {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        max-height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+    <!-- BLOQUEIO TOTAL DE ANÚNCIOS (mesmo método do Bomb It 7) -->
+    <style>
+      :is(
+          [id*="google_ads_iframe"],
+          [id*="taboola-"],
+          .taboolaHeight,
+          .taboola-placeholder,
+          #top-ad,
+          #credential_picker_container,
+          #credentials-picker-container,
+          #credential_picker_iframe,
+          [id*="google-one-tap-iframe"],
+          #google-one-tap-popup-container,
+          .google-one-tap__module,
+          .google-one-tap-modal-div,
+          #amp_floatingAdDiv,
+          #ez-content-blocker-container
+        ) {
+        display: none !important;
+        min-height: 0 !important;
+        height: 0 !important;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      src="./scripts/tcf.stub.js"
+      id="gd-cookie-pro-tcf-stub"
+      charset="UTF-8"
+    ></script>
+    <script type="text/javascript" async src="/p/locus/" id="locus"></script>
+    <script
+      type="text/javascript"
+      src="./scripts/OtAutoBlock.js"
+      id="gd-cookie-pro-autoblock"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./scripts/otSDKStub.js"
+      id="gd-cookie-pro-stub"
+      charset="UTF-8"
+      data-domain-script="ffd4774b-99ae-4464-8f40-3afa12b4692e"
+    ></script>
+    <script>
+      function OptanonWrapper() {}
+    </script>
+    <script
+      type="text/javascript"
+      async
+      src="/gtag/js"
+      id="gdsdk_google_analytics"
+    ></script>
+    <script
+      type="text/javascript"
+      async
+      src="./scripts/gamemonkey-sdk.js"
+      id="GamedockSDK"
+    ></script>
+    <script
+      type="text/javascript"
+      async
+      src="./scripts/headerlift.min.js"
+      id="gdsdk_prebid"
+    ></script>
+    <script
+      id="GDSplashDynamic"
+      crossorigin="true"
+      src="./scripts/index.js"
+    ></script>
+    <script
+      src="./scripts/otBannerSdk.js"
+      async
+      type="text/javascript"
+    ></script>
+    <script
+      type="text/javascript"
+      async
+      src="./scripts/socket.io.js"
+      id="soecket.io.js"
+    ></script>
+    <style type="text/css">
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      html {
+        font-size: 16px;
+      }
+      body {
+        position: inherit;
+        overflow: hidden;
+        font-family: Inter !important;
+      }
+      .tesseract-splash-background-container {
+        overflow: hidden;
+        background-image: url(./images/ts-bg.svg);
+        background-color: #fff;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .tesseract-splash-background-container,
+      .tesseract-splash-container {
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .tesseract-splash-container {
+        display: flex;
+        flex-flow: column;
+      }
+      .tesseract-splash-top {
+        flex-flow: column;
+        flex: 1;
+      }
+      .tesseract-splash-bottom,
+      .tesseract-splash-top {
+        display: flex;
+        box-sizing: border-box;
+        align-self: center;
+        justify-content: center;
+      }
+      .tesseract-splash-bottom {
+        flex-flow: column;
+        width: 100%;
+        padding-left: 6px;
+        padding-right: 6px;
+        padding-bottom: 6px;
+      }
+      .tesseract-splash-bottom > .tesseract-splash-consent {
+        box-sizing: border-box;
+        width: 100%;
+        color: #fff;
+        text-align: justify;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 150%;
+        padding: 10px 30px;
+        left: 0;
+        bottom: 0;
+      }
+      .tesseract-game {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+      .tesseract-game > img {
+        width: 25%;
+      }
+      #tesseract-splash-button {
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 30%;
+        margin: 0 auto;
+        outline: none;
+        flex-direction: row;
+        width: 13rem;
+        font-weight: 600;
+        font-size: 16px;
+        border-radius: 86.154px;
+        background: #3b21cc !important;
+      }
+      #tesseract-splash-button > p {
+        margin-left: 1rem;
+      }
+      #tesseract-splash-button:active {
+        outline: none;
+      }
+      .tesseract-splash-game-thumbnail {
+        width: 150px;
+        height: 150px;
+        flex-shrink: 0;
+        border-radius: 16px;
+        top: 20%;
+        position: relative;
+        margin: 0 auto;
+      }
+      .tesseract-splash-title {
+        top: 22%;
+        font-family: Inter !important;
+        color: #3b21cc;
+        font-size: 1.6rem;
+        font-weight: 700;
+      }
+      .tesseract-splash-company,
+      .tesseract-splash-title {
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: Inter;
+        font-style: normal;
+        line-height: normal;
+      }
+      .tesseract-splash-company {
+        top: 23%;
+        color: #4c4c4c;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      .tesseract-splash-bottom > .tesseract-splash-consent a {
+        color: #60bdea !important;
+      }
+      .tesseract-splash-bottom > .tesseract-splash-consent a:active,
+      .tesseract-splash-bottom > .tesseract-splash-consent a:hover {
+        color: #9cdfff !important;
+      }
+      .tesseract-loader,
+      .tesseract-loader:after {
+        border-radius: 50%;
+        width: 1.5em;
+        height: 1.5em;
+      }
+      .tesseract-loader {
+        top: 30%;
+        margin: 0 auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border: 1.1em solid hsla(0, 0%, 100%, 0.2);
+        border-left-color: #fff;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s linear infinite;
+        animation: load8 1.1s linear infinite;
+        display: none;
+        box-sizing: unset;
+      }
+      @-webkit-keyframes load8 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(1turn);
+          transform: rotate(1turn);
+        }
+      }
+      @keyframes load8 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(1turn);
+          transform: rotate(1turn);
+        }
+      }
+      @media (max-width: 1024px) {
+        html {
+          font-size: 13px;
+        }
+      }
+    </style>
+    <style data-jss="" data-meta="MuiCssBaseline">
+      html {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+      strong,
+      b {
+        font-weight: 700;
+      }
+      body {
+        color: #eee;
+        margin: 0;
+        font-size: 0.875rem;
+        font-family: Poppins, Roboto;
+        font-weight: 400;
+        line-height: 1.43;
+        background-color: #141414;
+      }
+      @media print {
+        body {
+          background-color: #fff;
+        }
+      }
+      body::backdrop {
+        background-color: #141414;
+      }
+    </style>
+    <script type="text/javascript" async src="./scripts/otTCF.js"></script>
+    <style id="onetrust-style">
+      /* ... (estilo OneTrust permanece igual ao original) ... */
+    </style>
+  </head>
+  <body>
+    <!-- URL FIXA: o iframe já contém a configuração completa e não será alterada -->
+    <iframe
+      id="game"
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen
+      seamless=""
+      scrolling="no"
+      src="//html5.gamedistribution.com/rvvASMiM/ec01b356fb374c15a165dca5f7da22e8/index.html?gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2h0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tL2VjMDFiMzU2ZmIzNzRjMTVhMTY1ZGNhNWY3ZGEyMmU4LyIsInBhcmVudERvbWFpbiI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidG9wRG9tYWluIjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJoYXNJbXByZXNzaW9uIjpmYWxzZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xOCJ9"
+    ></iframe>
+
+    <script type="text/javascript">
+      (function () {
+        function GameLoader() {
+          this.init = function () {
+            this._gameId = "ec01b356fb374c15a165dca5f7da22e8";
+            this._container = document.getElementById("game");
+
+            // --- FIX: IMPEDE QUE O SDK ALTERE A URL (SITE LOCK REMOVIDO) ---
+            // O iframe já possui a URL correta e fixa. Marcamos como inicializado
+            // para que qualquer tentativa de load seja ignorada.
+            this._container_initialized = true;
+
+            this._loader = this._getLoaderData();
+            this._hasImpression = false;
+            this._hasSuccess = false;
+            this._insertGameSDK();
+            this._softgamesDomains = this._getDomainData();
+
+            // Garante que o iframe receba foco ao carregar
+            this._container.onload = this._onFrameLoaded.bind(this);
+          };
+
+          this._getLoaderData = function () {
+            return { enabled: true, sdk_version: "1.15.2", _: 55 };
+          };
+
+          this._getDomainData = function () {
+            return [
+              { name: "minigame.aeriagames.jp", id: 4217 },
+              { name: "localhost:8080", id: 4217 },
+              { name: "minigame-stg.aeriagames.jp", id: 4217 },
+            ];
+          };
+
+          this._insertGameSDK = function () {
+            if (!this._gameId) return;
+
+            window["GD_OPTIONS"] = {
+              gameId: this._gameId,
+              loader: this._loader,
+              onLoaderEvent: this._onLoaderEvent.bind(this),
+              onEvent: this._onEvent.bind(this),
+            };
+
+            (function (d, s, id) {
+              var js,
+                fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "https://html5.api.gamedistribution.com/main.min.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            })(document, "script", "gamedistribution-jssdk");
+          };
+
+          // Função _loadGame mantida apenas para compatibilidade, mas nunca será executada
+          // porque this._container_initialized = true
+          this._loadGame = function (options) {
+            if (this._container_initialized) return;
+            // Nada é alterado – a URL permanece a definida no HTML
+          };
+
+          this._onLoaderEvent = function (event) {
+            switch (event.name) {
+              case "LOADER_DATA":
+                this._bridge = event.message.bridge;
+                this._game = event.message.game;
+                break;
+            }
+          };
+
+          this._onEvent = function (event) {
+            switch (event.name) {
+              case "SDK_GAME_START":
+                // A chamada abaixo não fará nada devido ao _container_initialized = true
+                this._bridge &&
+                  this._loadGame({ hasImpression: this._hasImpression });
+                break;
+              case "AD_ERROR":
+              case "AD_SDK_CANCELED":
+                this._hasImpression = false || this._hasSuccess;
+                break;
+              case "ALL_ADS_COMPLETED":
+              case "COMPLETE":
+              case "USER_CLOSE":
+              case "SKIPPED":
+                this._hasImpression = true;
+                this._hasSuccess = true;
+                break;
+            }
+          };
+
+          this._onFrameLoaded = function (event) {
+            var container = this._container;
+            setTimeout(function () {
+              try {
+                container.contentWindow.focus();
+              } catch (err) {}
+            }, 100);
+          };
+        }
+        new GameLoader().init();
+      })();
+    </script>
+
+    <iframe
+      name="__tcfapiLocator"
+      title="TCF Locator"
+      style="display: none"
+    ></iframe>
+    <div class="gd__toaster__container"></div>
+    <style id="gd__toaster__style">
+      .gd__toaster__container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 3000;
+      }
+      .gd__toaster {
+        background: rgb(76, 175, 80);
+        border-radius: 8px;
+        padding: 12px 16px;
+        color: white;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        min-width: 250px;
+        max-width: 300px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .gd__toaster__icon {
+        width: 22px;
+        height: 22px;
+      }
+      .gd__toaster__msg {
+        font-size: 14px;
+        line-height: 1.3;
+      }
+    </style>
+    <div id="onetrust-consent-sdk" data-nosnippet="true">
+      <!-- Conteúdo OneTrust (idêntico ao original, omitido aqui por brevidade) -->
+    </div>
+  </body>
+</html>
