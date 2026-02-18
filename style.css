@@ -1,12 +1,44 @@
 /* =========================================
-   1. CONFIGURAÇÕES GERAIS
+   GAMEHUB PREMIUM - GLASSMORPHISM EDITION
    ========================================= */
+
 :root {
-  --bg-color: #0a0a0a; /* Fundo Preto */
-  --card-bg: #1c1c1e; /* Fundo Cinza App */
-  --text-color: #ffffff; /* Texto Branco */
-  --accent-color: #007aff; /* Azul Destaque */
-  --highlight: #ff9500; /* Laranja (Recomendados) */
+  /* Cores Base */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a25;
+
+  /* Glass Effects */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+
+  /* Cores de Destaque */
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --accent-glow: rgba(99, 102, 241, 0.4);
+
+  /* Categorias */
+  --n64-color: #ff6b6b;
+  --megadrive-color: #4ecdc4;
+  --html-color: #45b7d1;
+  --favorite-color: #ffd93d;
+
+  /* Texto */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px var(--accent-glow);
+
+  /* Transições */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -16,363 +48,873 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--bg-color);
-  font-family: "Inter", sans-serif;
-  color: var(--text-color);
+  background: var(--bg-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 /* =========================================
-     2. CABEÇALHO E BUSCA
+     BACKGROUND EFFECTS
      ========================================= */
-header {
-  background: rgba(10, 10, 10, 0.9);
-  backdrop-filter: blur(20px);
-  padding: 15px 20px;
+
+.ambient-light {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(99, 102, 241, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(255, 107, 107, 0.05) 0%,
+      transparent 40%
+    );
+  pointer-events: none;
+  z-index: -2;
+  animation: ambientMove 20s ease-in-out infinite;
+}
+
+.grid-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes ambientMove {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(2%, 2%) rotate(1deg);
+  }
+  66% {
+    transform: translate(-1%, 1%) rotate(-1deg);
+  }
+}
+
+/* =========================================
+     HEADER PREMIUM
+     ========================================= */
+
+.glass-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 16px 20px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+
+.logo i {
+  font-size: 28px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 500px;
 }
 
 .search-box {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 10px 15px;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  transition: all var(--transition-base);
+}
+
+.search-box:focus-within {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), var(--shadow-md);
+}
+
+.search-icon {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-right: 12px;
+  transition: color var(--transition-fast);
+}
+
+.search-box:focus-within .search-icon {
+  color: var(--accent-primary);
 }
 
 .search-box input {
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: var(--text-primary);
+  font-size: 15px;
   width: 100%;
-  font-size: 16px;
-}
-.search-icon,
-.clear-icon {
-  color: #888;
-}
-.clear-icon {
-  cursor: pointer;
-}
-.clear-icon:hover {
-  color: #fff;
+  font-weight: 500;
 }
 
-/* =========================================
-     3. SEÇÕES E TÍTULOS
-     ========================================= */
-.section-title {
-  max-width: 1000px;
-  margin: 0 auto 10px auto;
-  padding: 0 20px;
-  font-size: 16px;
-  color: #ccc;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  opacity: 0;
+  transform: scale(0.8);
 }
-.main-title {
-  margin-top: 20px;
-  opacity: 0.6;
-  font-size: 14px;
+
+.search-box:focus-within .clear-btn,
+.clear-btn[style*="block"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.clear-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
 /* =========================================
-     4. ÁREA DE RECOMENDAÇÕES (Jogos do Dia)
+     MAIN CONTAINER
      ========================================= */
-.recommendations-section {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
 }
 
-.rec-grid {
+/* =========================================
+     SECTION HEADERS
+     ========================================= */
+
+.section-header {
   display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  padding: 10px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  scrollbar-width: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-.rec-grid::-webkit-scrollbar {
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.title-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--glass-border) 0%, transparent 100%);
+  margin-left: 20px;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--glass-bg);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.active {
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* =========================================
+     RECOMMENDATIONS CAROUSEL
+     ========================================= */
+
+.rec-section {
+  margin-bottom: 48px;
+  animation: fadeInUp 0.6s ease;
+}
+
+.rec-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.rec-carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* Destaque Laranja nos Recomendados */
-.rec-grid .icon-shape {
-  border: 2px solid var(--highlight);
-  box-shadow: 0 0 15px rgba(255, 149, 0, 0.15);
+/* =========================================
+     GAME GRID - PREMIUM CARDS
+     ========================================= */
+
+.games-section {
+  animation: fadeInUp 0.6s ease 0.1s both;
 }
 
-/* =========================================
-     5. GRADE DE JOGOS (PRINCIPAL)
-     ========================================= */
 .app-grid {
-  padding: 20px;
   display: grid;
-  /* CELULAR: 3 Colunas Fixas */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px 10px;
-  max-width: 1000px;
-  margin: 0 auto;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 24px;
 }
 
-/* =========================================
-     6. ÍCONES (DESIGN SQUIRCLE)
-     ========================================= */
+/* Game Card - Glassmorphism + Neumorphism */
 .app-icon {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-  width: 80px;
-  animation: popIn 0.5s ease;
-  position: relative; /* Necessário para o botão de favorito */
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform var(--transition-base);
 }
 
-.icon-shape {
-  width: 70px;
-  height: 70px; /* Tamanho Fixo Celular */
-  background: var(--card-bg);
-  border-radius: 16px;
-  overflow: hidden; /* CORTA IMAGEM GIGANTE */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 8px;
+.app-icon:hover {
+  transform: translateY(-8px);
+}
+
+.icon-wrapper {
   position: relative;
-  transition: transform 0.2s;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--glass-highlight);
+  transition: all var(--transition-base);
 }
 
-.icon-shape img {
+.app-icon:hover .icon-wrapper {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg), 0 0 30px var(--accent-glow),
+    inset 0 1px 0 var(--glass-highlight);
+  transform: scale(1.02);
+}
+
+/* Platform Badges */
+.platform-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.badge-n64 {
+  background: rgba(255, 107, 107, 0.9);
+  color: white;
+}
+
+.badge-megadrive {
+  background: rgba(78, 205, 196, 0.9);
+  color: white;
+}
+
+.badge-html {
+  background: rgba(69, 183, 209, 0.9);
+  color: white;
+}
+
+.icon-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* A MÁGICA: Preenche sem distorcer */
+  object-fit: cover;
+  transition: transform var(--transition-slow);
 }
 
-.app-name {
-  font-size: 12px;
-  font-weight: 500;
-  color: #e0e0e0;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
+.app-icon:hover .icon-wrapper img {
+  transform: scale(1.1);
 }
 
-.app-icon:active .icon-shape {
-  transform: scale(0.95);
-  filter: brightness(0.7);
-}
-
-/* --- FAVORITOS (NOVO) --- */
-.fav-btn {
+/* Overlay de Hover */
+.icon-overlay {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #2c2c2e;
-  color: #555;
-  width: 25px;
-  height: 25px;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.app-icon:hover .icon-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+}
+
+.app-icon:hover .play-icon {
+  transform: translateY(0);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Favorite Button */
+.fav-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 10;
-  transition: all 0.2s ease;
+  z-index: 20;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .fav-btn:hover {
   transform: scale(1.1);
+  border-color: var(--favorite-color);
+}
+
+.fav-btn i {
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
 }
 
 .fav-btn.is-favorite {
-  background: #fff;
-  color: #ff9500; /* Laranja/Dourado */
-  box-shadow: 0 0 10px rgba(255, 149, 0, 0.6);
-  border: none;
+  background: var(--favorite-color);
+  border-color: var(--favorite-color);
+  box-shadow: 0 0 20px rgba(255, 217, 61, 0.4);
+}
+
+.fav-btn.is-favorite i {
+  color: var(--bg-primary);
+}
+
+/* Game Name */
+.app-name {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.app-icon:hover .app-name {
+  color: var(--text-primary);
 }
 
 /* =========================================
-     7. AJUSTES PARA PC (Telas Maiores)
+     EMPTY STATE
      ========================================= */
-@media (min-width: 768px) {
-  .app-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 40px 20px;
+
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+}
+
+.ghost-animation {
+  font-size: 64px;
+  margin-bottom: 24px;
+  opacity: 0.5;
+  animation: float 3s ease-in-out infinite;
+}
+
+.ghost-animation i {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+}
+
+.no-results h3 {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.no-results p {
+  font-size: 14px;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
   }
-  .rec-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    overflow-x: visible;
-  }
-  .icon-shape {
-    width: 90px;
-    height: 90px;
-  }
-  .app-icon {
-    width: 100px;
-  }
-  .app-icon:hover .icon-shape {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  50% {
+    transform: translateY(-20px);
   }
 }
 
 /* =========================================
-     8. MODAL (JANELA DO JOGO)
+     MODAL PREMIUM
      ========================================= */
+
 .game-modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
+  inset: 0;
   z-index: 1000;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.game-modal.active .modal-backdrop {
+  opacity: 1;
+}
+
 .modal-content {
+  position: relative;
   width: 100%;
-  height: 90%;
-  max-width: 1200px;
-  background: #000;
-  border-radius: 12px;
+  max-width: 1000px;
+  height: 90vh;
+  background: rgba(18, 18, 26, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
   overflow: hidden;
-  border: 1px solid #333;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.9) translateY(20px);
+  opacity: 0;
+  transition: all var(--transition-slow);
+}
+
+.game-modal.active .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
 .modal-header {
-  height: 45px;
-  background: #151515;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-  border-bottom: 1px solid #333;
-  flex-shrink: 0;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--glass-border);
 }
 
-.game-target {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: #000;
+.game-info {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 12px;
 }
 
-/* Garante que iframes e emuladores dentro do palco preencham 100% */
-.game-target iframe,
-#emulator-container {
-  width: 100% !important;
-  height: 100% !important;
-  border: none;
-  display: block;
+.game-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .modal-controls {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
+
 .control-btn {
-  background: #333;
-  color: white;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all var(--transition-fast);
 }
+
 .control-btn:hover {
-  background: #444;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--glass-highlight);
+  transform: translateY(-2px);
 }
+
 .control-btn.close-btn {
-  background: #ff3b30;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
 }
+
 .control-btn.close-btn:hover {
-  background: #ff453a;
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
-#modalGameTitle {
-  font-weight: bold;
+
+.modal-body {
+  flex: 1;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.game-target {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.game-target iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Loading Overlay */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity var(--transition-base);
+}
+
+.game-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.spinner-ring {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner span {
   font-size: 14px;
-  color: white;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fullscreen Mode */
+.modal-content.fullscreen {
+  max-width: 100%;
+  height: 100vh;
+  border-radius: 0;
+}
+
+.modal-content.fullscreen .modal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  transform: translateY(-100%);
+  transition: transform var(--transition-base);
+}
+
+.modal-content.fullscreen:hover .modal-header,
+.modal-content.fullscreen:focus-within .modal-header {
+  transform: translateY(0);
 }
 
 /* =========================================
-     AJUSTES DE TELA CHEIA (NATIVO + MOBILE)
+     ANIMATIONS
      ========================================= */
 
-/* Regra unificada: Funciona com API nativa (:fullscreen) OU classe forçada (.fullscreen-active) */
-.modal-content:fullscreen,
-.modal-content.fullscreen-active {
-  width: 100vw !important;
-  height: 100vh !important;
-  border: none !important;
-  border-radius: 0 !important;
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background: #000; /* Garante fundo preto */
-  padding: 0 !important;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ESCONDE O CABEÇALHO (A Mágica) */
-.modal-content:fullscreen .modal-header,
-.modal-content.fullscreen-active .modal-header {
-  display: none !important; /* Força o desaparecimento */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* GARANTE QUE O JOGO OCUPE 100% */
-.modal-content:fullscreen .game-target,
-.modal-content.fullscreen-active .game-target {
-  width: 100%;
-  height: 100%;
-  flex: 1;
+/* Staggered Animation for Grid */
+.app-icon:nth-child(1) {
+  animation-delay: 0ms;
+}
+.app-icon:nth-child(2) {
+  animation-delay: 50ms;
+}
+.app-icon:nth-child(3) {
+  animation-delay: 100ms;
+}
+.app-icon:nth-child(4) {
+  animation-delay: 150ms;
+}
+.app-icon:nth-child(5) {
+  animation-delay: 200ms;
+}
+.app-icon:nth-child(6) {
+  animation-delay: 250ms;
+}
+/* ... continua pattern */
+
+/* =========================================
+     RESPONSIVE DESIGN
+     ========================================= */
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .filter-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .modal-content {
+    height: 100vh;
+    border-radius: 0;
+    max-width: 100%;
+  }
 }
 
-/* Ajuste para iframes */
-.modal-content:fullscreen iframe,
-.modal-content.fullscreen-active iframe,
-.modal-content:fullscreen #emulator-container,
-.modal-content.fullscreen-active #emulator-container {
-  width: 100vw !important;
-  height: 100vh !important;
+@media (max-width: 480px) {
+  .app-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .main-container {
+    padding: 20px 16px;
+  }
+}
+
+/* =========================================
+     SCROLLBAR STYLING
+     ========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection Color */
+::selection {
+  background: var(--accent-primary);
+  color: white;
 }
