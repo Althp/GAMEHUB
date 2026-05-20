@@ -156,41 +156,9 @@
             width: 50%;
             height: 220px;
         }
-        
-        /* Orientation controls */
-        .orientation-controls {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-        .orientation-btn {
-            padding: 8px 12px;
-            background: rgba(0, 255, 136, 0.2);
-            border: 1px solid #00ff88;
-            border-radius: 5px;
-            color: #00ff88;
-            cursor: pointer;
-            font-size: 0.8em;
-            transition: all 0.2s;
-        }
-        .orientation-btn:hover {
-            background: rgba(0, 255, 136, 0.4);
-        }
-        .orientation-btn.active {
-            background: #00ff88;
-            color: #000;
-        }
     </style>
 </head>
 <body>
-    <div class="orientation-controls">
-        <button class="orientation-btn active" onclick="setOrientation('auto')" id="btn-auto">Auto</button>
-        <button class="orientation-btn" onclick="setOrientation('portrait')" id="btn-portrait">Retrato</button>
-        <button class="orientation-btn" onclick="setOrientation('landscape')" id="btn-landscape">Paisagem</button>
-    </div>
     <div id="screen-area">
         <canvas tabindex="0" id="display" style="display: none;"></canvas>
         <div id="loading">Carregando GAMEHUB...</div>
@@ -532,33 +500,6 @@
                 await launcherUtil.installFromBundle(cheerpjWebRoot + "/apps/", appId);
             }
         }
-
-        // Orientation control function
-        function setOrientation(mode) {
-            // Update button states
-            document.querySelectorAll('.orientation-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${mode}`).classList.add('active');
-            
-            // Set forcePortrait based on mode
-            if (mode === 'auto') {
-                // Auto-detect based on game dimensions (default behavior)
-                forcePortrait = false;
-            } else if (mode === 'portrait') {
-                // Force portrait mode
-                forcePortrait = true;
-            } else if (mode === 'landscape') {
-                // Force landscape mode
-                forcePortrait = false;
-            }
-            
-            // Reload to apply changes
-            if (scaleSet) {
-                location.reload();
-            }
-        }
-        
-        // Expose to global scope for HTML onclick handlers
-        window.setOrientation = setOrientation;
 
         async function init() {
             document.getElementById("loading").textContent = "Loading CheerpJ...";
