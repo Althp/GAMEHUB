@@ -80,7 +80,7 @@ function playGame(gameId) {
 
     playerTitle.textContent = game.title;
     
-    const emulatorUrl = `emulator/run.html?jar=${encodeURIComponent(game.jar)}`;
+    const emulatorUrl = `emulator/web/run.html?jar=${encodeURIComponent(game.jar)}`;
     
     playerFrame.src = emulatorUrl;
     playerPage.classList.add('active');
