@@ -40,9 +40,9 @@ function loadEmulator(game) {
   placeholder.innerHTML = '<p>⏳ Carregando emulador...</p>';
 
   const basePath = getBasePath();
-  const jarPath = `${basePath}lib/freej2me-web/web/jar/${game.id}.jar`;
+  const jarRelativePath = `../../../../games/${game.id}/${game.id}.jar`;
 
-  const emulatorUrl = `${basePath}lib/freej2me-web/web/run.html?jar=${game.id}.jar&fractionScale=1`;
+  const emulatorUrl = `${basePath}lib/freej2me-web/web/run.html?jar=${jarRelativePath}&fractionScale=1`;
 
   iframe.src = emulatorUrl;
 
@@ -56,7 +56,7 @@ function loadEmulator(game) {
     placeholder.innerHTML = `
       <div style="text-align:center;padding:40px;">
         <p style="color:var(--danger);margin-bottom:15px;">Erro ao carregar emulador</p>
-        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Verifique se o arquivo JAR existe em lib/freej2me-web/web/jar/</p>
+        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Verifique se o arquivo JAR existe em games/${game.id}/</p>
         <a href="${game.jar}" class="btn btn-primary" download>⬇ Baixar .JAR para jogar offline</a>
       </div>
     `;

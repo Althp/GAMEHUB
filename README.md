@@ -31,6 +31,22 @@ GAMEHUB/
 │   ├── app.js              # Logica principal
 │   ├── search.js           # Busca e filtros
 │   └── emulator.js         # Integracao do emulador
+── data/games.json         # Catalogo de jogos
+├── lib/freej2me-web/       # Emulador J2ME
+│   └── web/
+│       └── run.html        # Emulador
+├── games/                  # Arquivos .JAR/.JAD
+├── covers/                 # Capas dos jogos (SVG)
+└── screenshots/            # Screenshots
+```
+GAMEHUB/
+├── index.html              # Pagina principal
+├── game.html               # Pagina do jogo + emulador
+├── css/style.css           # Estilos
+├── js/
+│   ├── app.js              # Logica principal
+│   ├── search.js           # Busca e filtros
+│   └── emulator.js         # Integracao do emulador
 ├── data/games.json         # Catalogo de jogos
 ├── lib/freej2me-web/       # Emulador J2ME
 │   └── web/
@@ -80,23 +96,15 @@ Edite `data/games.json` e adicione uma entrada:
 }
 ```
 
-### 4. Sincronizar JARs para o emulador
-
-Execute o script de sincronizacao:
-
-```powershell
-.\sync-jars.ps1
-```
-
-Isso copia os JARs de `games/` para `lib/freej2me-web/web/jar/`
-
-### 5. Commit e push
+### 4. Commit e push
 
 ```bash
 git add -A
 git commit -m "Adiciona novo jogo: Nome do Jogo"
 git push
 ```
+
+O emulador carrega os JARs direto da pasta `games/`, sem necessidade de sincronizacao.
 
 ##  Emulador
 
