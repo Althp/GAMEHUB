@@ -10,7 +10,7 @@ Plataforma web para hospedar, catalogar e jogar jogos Java (.JAR/.JAD) diretamen
 
 GAMEHUB e uma plataforma dedicada a preservar jogos Java classicos. Aqui voce pode:
 
-- **Jogar no navegador** usando o emulador freej2me-web integrado
+- **Jogar no navegador** usando o emulador freej2me-web (via iframe)
 - **Baixar arquivos** .JAR e .JAD gratuitamente
 - **Explorar o catalogo** com busca, filtros e ordenacao
 
@@ -31,34 +31,13 @@ GAMEHUB/
 │   ├── app.js              # Logica principal
 │   ├── search.js           # Busca e filtros
 │   └── emulator.js         # Integracao do emulador
-── data/games.json         # Catalogo de jogos
-├── lib/freej2me-web/       # Emulador J2ME
-│   └── web/
-│       └── run.html        # Emulador
+├── data/games.json         # Catalogo de jogos
 ├── games/                  # Arquivos .JAR/.JAD
 ├── covers/                 # Capas dos jogos (SVG)
 └── screenshots/            # Screenshots
 ```
-GAMEHUB/
-├── index.html              # Pagina principal
-├── game.html               # Pagina do jogo + emulador
-├── css/style.css           # Estilos
-├── js/
-│   ├── app.js              # Logica principal
-│   ├── search.js           # Busca e filtros
-│   └── emulator.js         # Integracao do emulador
-├── data/games.json         # Catalogo de jogos
-├── lib/freej2me-web/       # Emulador J2ME
-│   └── web/
-│       ├── run.html        # Emulador
-│       └── jar/            # JARs dos jogos (sincronizados)
-├── games/                  # Arquivos .JAR/.JAD originais
-├── covers/                 # Capas dos jogos (SVG)
-── screenshots/            # Screenshots
-└── sync-jars.ps1           # Script para sincronizar JARs
-```
 
-## 🎯 Como Adicionar Jogos
+##  Como Adicionar Jogos
 
 ### 1. Adicionar arquivos do jogo
 
@@ -104,11 +83,16 @@ git commit -m "Adiciona novo jogo: Nome do Jogo"
 git push
 ```
 
-O emulador carrega os JARs direto da pasta `games/`, sem necessidade de sincronizacao.
+O emulador carrega os JARs direto da pasta `games/` via URL publica.
 
-##  Emulador
+## 🎮 Emulador
 
 O GAMEHUB usa o [freej2me-web](https://github.com/zb3/freej2me-web) - um emulador J2ME completo que roda no navegador.
+
+### Como funciona:
+- O emulador e carregado via iframe do servidor oficial (`zb3.github.io/freej2me-web`)
+- O arquivo JAR e passado como parametro URL
+- O emulador faz download do JAR e executa no navegador
 
 ### Recursos do emulador:
 - ✅ Suporte a MIDP 2.0
@@ -133,8 +117,9 @@ O GAMEHUB usa o [freej2me-web](https://github.com/zb3/freej2me-web) - um emulado
 - O emulador requer conexao com internet (usa CheerpJ)
 - Nem todos os jogos J2ME sao compatíveis
 - Clique na tela do emulador para focar os controles de teclado
+- O emulador e hospedado externamente (zb3.github.io)
 
-##  Deploy no GitHub Pages
+## 📦 Deploy no GitHub Pages
 
 1. Crie um repositorio no GitHub
 2. Push os arquivos

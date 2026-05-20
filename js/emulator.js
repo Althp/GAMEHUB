@@ -40,9 +40,9 @@ function loadEmulator(game) {
   placeholder.innerHTML = '<p>⏳ Carregando emulador...</p>';
 
   const basePath = getBasePath();
-  const jarRelativePath = `../../../../games/${game.id}/${game.id}.jar`;
+  const jarUrl = window.location.origin + basePath + game.jar;
 
-  const emulatorUrl = `${basePath}lib/freej2me-web/web/run.html?jar=${jarRelativePath}&fractionScale=1`;
+  const emulatorUrl = `https://zb3.github.io/freej2me-web/?jar=${encodeURIComponent(jarUrl)}&fractionScale=1`;
 
   iframe.src = emulatorUrl;
 
@@ -56,7 +56,7 @@ function loadEmulator(game) {
     placeholder.innerHTML = `
       <div style="text-align:center;padding:40px;">
         <p style="color:var(--danger);margin-bottom:15px;">Erro ao carregar emulador</p>
-        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Verifique se o arquivo JAR existe em games/${game.id}/</p>
+        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Verifique sua conexao com a internet</p>
         <a href="${game.jar}" class="btn btn-primary" download>⬇ Baixar .JAR para jogar offline</a>
       </div>
     `;
@@ -70,7 +70,7 @@ function unloadEmulator() {
   iframe.src = '';
   iframe.classList.add('hidden');
   placeholder.classList.remove('hidden');
-  placeholder.innerHTML = '<p> Clique em "Iniciar Emulador" para jogar</p>';
+  placeholder.innerHTML = '<p> Clique em "Jogar Agora" para iniciar</p>';
   emulatorLoaded = false;
 }
 
