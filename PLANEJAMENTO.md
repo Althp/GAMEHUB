@@ -164,9 +164,15 @@ GAMEHUB/
 
 ---
 
-## Emulador freej2me-web
+## Emulador freej2me-web (Externo)
 
 **Fonte:** https://github.com/zb3/freej2me-web
+**URL:** https://zb3.github.io/freej2me-web/
+
+**Abordagem:** Emulador carregado via iframe externo
+- ✅ Sem problemas de Range header (usa servidor oficial)
+- ✅ Repositorio mais leve (~50MB menor)
+- ✅ Emulador completo com 3D, MIDI, MIDP 2.0
 
 **Funcionalidades do emulador:**
 - [x] Carregar arquivo .JAR via URL
