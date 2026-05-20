@@ -227,9 +227,6 @@
 
         // Force portrait mode to avoid game orientation errors
         let forcePortrait = true;
-        let canvasRotated = false;
-        let originalGameWidth = 0;
-        let originalGameHeight = 0;
 
         const keyRepeatManager = new KeyRepeatManager();
 
@@ -315,14 +312,6 @@
 
                 let x = e.offsetX / display.currentCSSZoom | 0;
                 let y = e.offsetY / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerpressed',
@@ -341,14 +330,6 @@
 
                 let x = e.offsetX / display.currentCSSZoom | 0;
                 let y = e.offsetY / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerdragged',
@@ -367,14 +348,6 @@
 
                 let x = (e.pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.pageY - display.offsetTop) / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerreleased',
@@ -392,14 +365,6 @@
 
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerpressed',
@@ -415,14 +380,6 @@
 
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerdragged',
@@ -438,14 +395,6 @@
 
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
-                
-                // Transform coordinates if canvas is rotated
-                if (canvasRotated) {
-                    const transformedX = y;
-                    const transformedY = originalGameHeight - x;
-                    x = transformedX;
-                    y = transformedY;
-                }
 
                 evtQueue.queueEvent({
                     kind: 'pointerreleased',
@@ -549,24 +498,15 @@
                             display.focus();
                         }
                         
-                        // Store original game dimensions
-                        originalGameWidth = width;
-                        originalGameHeight = height;
-                        
                         // Force portrait mode by swapping dimensions if game requests landscape
                         if (forcePortrait && width > height) {
                             // Game wants landscape (e.g., 320x240), we swap to portrait (240x320)
                             screenCtx.canvas.width = height;
                             screenCtx.canvas.height = width;
-                            canvasRotated = true;
-                            
-                            // Rotate canvas visually so it displays correctly
-                            display.style.transform = 'rotate(90deg)';
-                            display.style.transformOrigin = 'center center';
+                            display.style.transform = '';
                         } else {
                             screenCtx.canvas.width = width;
                             screenCtx.canvas.height = height;
-                            canvasRotated = false;
                             display.style.transform = '';
                         }
                         
