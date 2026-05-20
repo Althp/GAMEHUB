@@ -1,5 +1,10 @@
 node_modules/
 .DS_Store
-*.jar
-*.jad
 Thumbs.db
+desktop.ini
+lib/freej2me-web/.git/
+lib/freej2me-web/builder_image/
+lib/freej2me-web/src/
+lib/freej2me-web/resources/
+lib/freej2me-web/build.xml
+lib/freej2me-web/index.html

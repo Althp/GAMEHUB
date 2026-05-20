@@ -74,41 +74,20 @@
           <div id="emulatorSection" class="emulator-section hidden">
             <div class="emulator-header">
               <h2>Emulador</h2>
-              <button id="closeEmulator" class="btn btn-close">✕ Fechar</button>
+              <div class="emulator-header-actions">
+                <button id="resetEmulator" class="btn btn-secondary">🔄 Reiniciar</button>
+                <button id="closeEmulator" class="btn btn-close">✕ Fechar</button>
+              </div>
             </div>
-            <div class="emulator-container">
-              <div id="emulatorWrapper" class="emulator-wrapper">
-                <div id="emulatorCanvas" class="emulator-canvas">
-                  <p class="emulator-placeholder">Clique em "Iniciar" para carregar o emulador</p>
-                </div>
+            <div id="emulatorIframeContainer" class="emulator-iframe-container">
+              <div id="emulatorPlaceholder" class="emulator-placeholder">
+                <p>🎮 Clique em "Iniciar Emulador" para jogar</p>
               </div>
-              <div class="emulator-controls">
-                <h3>Controles</h3>
-                <div class="controls-grid">
-                  <div class="control-key" data-key="ArrowUp">↑</div>
-                  <div class="control-key" data-key="ArrowLeft">←</div>
-                  <div class="control-key" data-key="ArrowDown">↓</div>
-                  <div class="control-key" data-key="ArrowRight">→</div>
-                  <div class="control-key" data-key="Enter">OK</div>
-                  <div class="control-key" data-key="Escape">Voltar</div>
-                  <div class="control-key" data-key="1">1</div>
-                  <div class="control-key" data-key="2">2</div>
-                  <div class="control-key" data-key="3">3</div>
-                  <div class="control-key" data-key="4">4</div>
-                  <div class="control-key" data-key="5">5</div>
-                  <div class="control-key" data-key="6">6</div>
-                  <div class="control-key" data-key="7">7</div>
-                  <div class="control-key" data-key="8">8</div>
-                  <div class="control-key" data-key="9">9</div>
-                  <div class="control-key" data-key="0">0</div>
-                  <div class="control-key" data-key="*">*</div>
-                  <div class="control-key" data-key="#">#</div>
-                </div>
-                <div class="emulator-actions">
-                  <button id="startEmulator" class="btn btn-primary">Iniciar Emulador</button>
-                  <button id="resetEmulator" class="btn btn-secondary">Reiniciar</button>
-                </div>
-              </div>
+              <iframe id="emulatorIframe" class="emulator-iframe hidden" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="emulator-info">
+              <p><strong>Controles:</strong> Setas = Direcao | Enter = OK | Esc = Menu | 0-9 = Numeros | F1/F2 = Soft Keys</p>
+              <p><strong>Dica:</strong> Clique na tela do emulador para focar os controles de teclado</p>
             </div>
           </div>
 
