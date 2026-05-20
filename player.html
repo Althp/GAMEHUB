@@ -556,6 +556,9 @@
                 location.reload();
             }
         }
+        
+        // Expose to global scope for HTML onclick handlers
+        window.setOrientation = setOrientation;
 
         async function init() {
             document.getElementById("loading").textContent = "Loading CheerpJ...";
