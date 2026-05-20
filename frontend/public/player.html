@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameHub - Emulator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    #game {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="game"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const config = {
+      EJS_player: '#game',
+      EJS_core: params.get('core') || 'nes',
+      EJS_gameUrl: params.get('gameUrl') || '',
+      EJS_gameName: params.get('gameName') || 'Game',
+      EJS_pathtodata: 'https://cdn.emulatorjs.org/stable/data/',
+      EJS_startOnLoaded: params.get('autoStart') !== 'false',
+      EJS_color: params.get('color') || '#8b5cf6',
+      EJS_backgroundColor: '#0f0f1a',
+    };
+
+    const biosUrl = params.get('biosUrl');
+    if (biosUrl) {
+      config.EJS_biosUrl = biosUrl;
+    }
+
+    const threads = params.get('threads');
+    if (threads === 'true') {
+      config.EJS_threads = true;
+    }
+
+    Object.keys(config).forEach(key => {
+      window[key] = config[key];
+    });
+  </script>
+  <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+</body>
+</html>
