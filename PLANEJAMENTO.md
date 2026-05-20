@@ -164,17 +164,19 @@ GAMEHUB/
 
 ---
 
-## Emulador j2me.js
+## Emulador freej2me-web
 
-**Fonte:** https://github.com/nicknisi/j2me.js (ou similar)
+**Fonte:** https://github.com/zb3/freej2me-web
 
 **Funcionalidades do emulador:**
 - [x] Carregar arquivo .JAR via URL
 - [x] Renderizar tela do jogo em `<canvas>`
 - [x] Mapear teclas do teclado para controles J2ME
 - [x] Controles touch para mobile
-- [ ] Suporte a MIDP 2.0 (requer j2me.js real)
-- [ ] Salvar/carregar estado do jogo
+- [x] Suporte a MIDP 2.0
+- [x] Salvar/carregar estado do jogo (RMS)
+- [x] Suporte a 3D (M3G, Mascot Capsule)
+- [x] Audio MIDI
 
 ---
 
