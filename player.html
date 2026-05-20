@@ -118,12 +118,13 @@
         #right-keys {
             right: 0;
         }
-        body.kbd-portrait #left-keys,
-        body.kbd-portrait #right-keys,
-        body.kbd-landscape #left-keys,
-        body.kbd-landscape #right-keys {
+        
+        /* Show keyboard only on mobile */
+        body.mobile-active.kbd-portrait #left-keys,
+        body.mobile-active.kbd-portrait #right-keys {
             display: flex;
         }
+        
         body.kbd-portrait #left-keys,
         body.kbd-portrait #right-keys {
             width: 50%;
@@ -139,11 +140,21 @@
             max-height: 400px;
         }
         body.kbd-portrait #screen-area {
-            bottom: 220px;
+            bottom: 0;
         }
         body.kbd-landscape #screen-area {
             left: 220px;
             right: 220px;
+        }
+        
+        /* Mobile portrait layout */
+        body.mobile-active.kbd-portrait #screen-area {
+            bottom: 220px;
+        }
+        body.mobile-active.kbd-portrait #left-keys,
+        body.mobile-active.kbd-portrait #right-keys {
+            width: 50%;
+            height: 220px;
         }
     </style>
 </head>
@@ -202,12 +213,21 @@
         const cheerpjWebRoot = '/app'+location.pathname.replace(/\/[^/]*$/,'');
 
         let isMobile = sp.get('mobile');
+        
+        // Auto-detect mobile devices
+        if (!isMobile && /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            isMobile = '1';
+        }
 
         let display = null;
         let screenCtx = null;
 
         let fractionScale = sp.get('fractionScale') || (localStorage && localStorage.getItem("pl.zb3.freej2me.fractionScale") === "true");
         let scaleSet = false;
+
+        // Force portrait mode to avoid game orientation errors
+        let forcePortrait = true;
+        let canvasRotated = false;
 
         const keyRepeatManager = new KeyRepeatManager();
 
@@ -219,24 +239,24 @@
             let screenWidth = window.innerWidth;
             let screenHeight = window.innerHeight;
 
+            // Always force portrait mode for the emulator
             if (isMobile) {
                 document.getElementById('left-keys').style.display = '';
                 document.getElementById('right-keys').style.display = '';
 
-                if (screenWidth > screenHeight) {
-                    document.body.classList.add('kbd-landscape');
-                    document.body.classList.remove('kbd-portrait');
-                    screenWidth = screenWidth - 2*kbdWidth;
-                } else {
-                    document.body.classList.add('kbd-portrait');
-                    document.body.classList.remove('kbd-landscape');
-                    screenHeight = screenHeight - kbdHeight;
-                }
+                // Force portrait mode regardless of actual screen orientation
+                document.body.classList.add('kbd-portrait');
+                document.body.classList.remove('kbd-landscape');
+                screenHeight = screenHeight - kbdHeight;
             }
 
+            // Swap dimensions to force portrait orientation
+            let effectiveWidth = forcePortrait ? Math.min(screenWidth, screenHeight) : screenWidth;
+            let effectiveHeight = forcePortrait ? Math.max(screenWidth, screenHeight) : screenHeight;
+
             let scale = Math.min(
-                screenWidth/screenCtx.canvas.width,
-                screenHeight/screenCtx.canvas.height
+                effectiveWidth/screenCtx.canvas.width,
+                effectiveHeight/screenCtx.canvas.height
             );
 
             if (!fractionScale) {
@@ -291,10 +311,20 @@
                 display.focus();
                 if (noMouse) return;
 
+                let x = e.offsetX / display.currentCSSZoom | 0;
+                let y = e.offsetY / display.currentCSSZoom | 0;
+                
+                // Adjust coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const temp = x;
+                    x = y;
+                    y = screenCtx.canvas.width - temp;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerpressed',
-                    x: e.offsetX / display.currentCSSZoom | 0,
-                    y: e.offsetY / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 mouseDown = true;
@@ -306,10 +336,20 @@
                 if (noMouse) return;
                 if (!mouseDown) return;
 
+                let x = e.offsetX / display.currentCSSZoom | 0;
+                let y = e.offsetY / display.currentCSSZoom | 0;
+                
+                // Adjust coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const temp = x;
+                    x = y;
+                    y = screenCtx.canvas.width - temp;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerdragged',
-                    x: e.offsetX / display.currentCSSZoom | 0,
-                    y: e.offsetY / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 e.preventDefault();
@@ -335,10 +375,20 @@
                 display.focus();
                 noMouse = true;
 
+                let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
+                let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
+                
+                // Adjust coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const temp = x;
+                    x = y;
+                    y = screenCtx.canvas.width - temp;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerpressed',
-                    x: (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0,
-                    y: (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 e.preventDefault();
@@ -347,10 +397,20 @@
             display.addEventListener('touchmove', async e => {
                 noMouse = true;
 
+                let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
+                let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
+                
+                // Adjust coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const temp = x;
+                    x = y;
+                    y = screenCtx.canvas.width - temp;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerdragged',
-                    x: (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0,
-                    y: (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 e.preventDefault();
@@ -359,10 +419,20 @@
             display.addEventListener('touchend', async e => {
                 noMouse = true;
 
+                let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
+                let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
+                
+                // Adjust coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const temp = x;
+                    x = y;
+                    y = screenCtx.canvas.width - temp;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerreleased',
-                    x: (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0,
-                    y: (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 e.preventDefault();
@@ -416,6 +486,11 @@
         async function init() {
             document.getElementById("loading").textContent = "Loading CheerpJ...";
 
+            // Add mobile class if on mobile device
+            if (isMobile) {
+                document.body.classList.add('mobile-active');
+            }
+
             display = document.getElementById('display');
             screenCtx = display.getContext('2d');
 
@@ -455,8 +530,21 @@
                             scaleSet = true;
                             display.focus();
                         }
-                        screenCtx.canvas.width = width;
-                        screenCtx.canvas.height = height;
+                        
+                        // Force portrait mode by swapping dimensions if needed
+                        if (forcePortrait && width > height) {
+                            screenCtx.canvas.width = height;
+                            screenCtx.canvas.height = width;
+                            canvasRotated = true;
+                            display.style.transform = 'rotate(90deg)';
+                            display.style.transformOrigin = 'center center';
+                        } else {
+                            screenCtx.canvas.width = width;
+                            screenCtx.canvas.height = height;
+                            canvasRotated = false;
+                            display.style.transform = '';
+                        }
+                        
                         autoscale();
                     },
                     async Java_pl_zb3_freej2me_bridge_shell_Shell_waitForAndDispatchEvents(lib, listener) {
