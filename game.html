@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">GAMEHUB - Jogo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🎮</span>
+        <span class="logo-text">GAMEHUB</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Voltar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="game-detail">
+      <div class="container">
+        <div id="gameLoading" class="loading">Carregando...</div>
+        <div id="gameNotFound" class="game-not-found hidden">
+          <h2>Jogo nao encontrado</h2>
+          <a href="index.html" class="btn btn-primary">Voltar ao catalogo</a>
+        </div>
+
+        <div id="gameContent" class="game-content hidden">
+          <div class="game-header">
+            <div class="game-cover">
+              <img id="gameCover" src="" alt="Capa do jogo">
+            </div>
+            <div class="game-info">
+              <h1 id="gameTitle"></h1>
+              <div class="game-meta">
+                <span class="meta-item">
+                  <span class="meta-label">Desenvolvedor</span>
+                  <span id="gameDeveloper" class="meta-value"></span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Genero</span>
+                  <span id="gameGenre" class="meta-value genre-badge"></span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Tamanho</span>
+                  <span id="gameSize" class="meta-value"></span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Ano</span>
+                  <span id="gameYear" class="meta-value"></span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Downloads</span>
+                  <span id="gameDownloads" class="meta-value"></span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Rating</span>
+                  <span id="gameRating" class="meta-value rating"></span>
+                </span>
+              </div>
+              <p id="gameDescription" class="game-description"></p>
+              <div class="game-actions">
+                <button id="playBtn" class="btn btn-primary btn-lg">▶ Jogar Agora</button>
+                <a id="downloadJar" href="#" class="btn btn-secondary btn-lg" download>⬇ Baixar .JAR</a>
+                <a id="downloadJad" href="#" class="btn btn-secondary btn-lg" download>⬇ Baixar .JAD</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="emulatorSection" class="emulator-section hidden">
+            <div class="emulator-header">
+              <h2>Emulador</h2>
+              <button id="closeEmulator" class="btn btn-close">✕ Fechar</button>
+            </div>
+            <div class="emulator-container">
+              <div id="emulatorWrapper" class="emulator-wrapper">
+                <div id="emulatorCanvas" class="emulator-canvas">
+                  <p class="emulator-placeholder">Clique em "Iniciar" para carregar o emulador</p>
+                </div>
+              </div>
+              <div class="emulator-controls">
+                <h3>Controles</h3>
+                <div class="controls-grid">
+                  <div class="control-key" data-key="ArrowUp">↑</div>
+                  <div class="control-key" data-key="ArrowLeft">←</div>
+                  <div class="control-key" data-key="ArrowDown">↓</div>
+                  <div class="control-key" data-key="ArrowRight">→</div>
+                  <div class="control-key" data-key="Enter">OK</div>
+                  <div class="control-key" data-key="Escape">Voltar</div>
+                  <div class="control-key" data-key="1">1</div>
+                  <div class="control-key" data-key="2">2</div>
+                  <div class="control-key" data-key="3">3</div>
+                  <div class="control-key" data-key="4">4</div>
+                  <div class="control-key" data-key="5">5</div>
+                  <div class="control-key" data-key="6">6</div>
+                  <div class="control-key" data-key="7">7</div>
+                  <div class="control-key" data-key="8">8</div>
+                  <div class="control-key" data-key="9">9</div>
+                  <div class="control-key" data-key="0">0</div>
+                  <div class="control-key" data-key="*">*</div>
+                  <div class="control-key" data-key="#">#</div>
+                </div>
+                <div class="emulator-actions">
+                  <button id="startEmulator" class="btn btn-primary">Iniciar Emulador</button>
+                  <button id="resetEmulator" class="btn btn-secondary">Reiniciar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screenshots-section">
+            <h2>Screenshots</h2>
+            <div id="screenshotsGrid" class="screenshots-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 GAMEHUB - Jogos Java Classico</p>
+    </div>
+  </footer>
+
+  <script src="js/emulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="350" viewBox="0 0 280 350">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894"/>
+      <stop offset="100%" style="stop-color:#2d3436"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="350" fill="url(#bg)"/>
+  <text x="140" y="140" font-size="80" text-anchor="middle" fill="white" opacity="0.9">⚽</text>
+  <text x="140" y="210" font-family="Arial,sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="white">FIFA</text>
+  <text x="140" y="245" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="rgba(255,255,255,0.7)">Football 2005</text>
+  <text x="140" y="300" font-family="Arial,sans-serif" font-size="12" text-anchor="middle" fill="rgba(255,255,255,0.5)">EA Mobile</text>
+</svg>
