@@ -6,8 +6,8 @@ const gamesData = [
         description: 'Colete diamantes e escape das cavernas!',
         icon: '💎',
         jar: 'diamondrush.jar',
-        width: 240,
-        height: 320
+        width: 320,
+        height: 240
     }
 ];
 

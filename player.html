@@ -156,9 +156,41 @@
             width: 50%;
             height: 220px;
         }
+        
+        /* Orientation controls */
+        .orientation-controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+        }
+        .orientation-btn {
+            padding: 8px 12px;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            color: #00ff88;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+        .orientation-btn:hover {
+            background: rgba(0, 255, 136, 0.4);
+        }
+        .orientation-btn.active {
+            background: #00ff88;
+            color: #000;
+        }
     </style>
 </head>
 <body>
+    <div class="orientation-controls">
+        <button class="orientation-btn active" onclick="setOrientation('auto')" id="btn-auto">Auto</button>
+        <button class="orientation-btn" onclick="setOrientation('portrait')" id="btn-portrait">Retrato</button>
+        <button class="orientation-btn" onclick="setOrientation('landscape')" id="btn-landscape">Paisagem</button>
+    </div>
     <div id="screen-area">
         <canvas tabindex="0" id="display" style="display: none;"></canvas>
         <div id="loading">Carregando GAMEHUB...</div>
@@ -228,6 +260,8 @@
         // Force portrait mode to avoid game orientation errors
         let forcePortrait = true;
         let canvasRotated = false;
+        let originalGameWidth = 0;
+        let originalGameHeight = 0;
 
         const keyRepeatManager = new KeyRepeatManager();
 
@@ -314,11 +348,12 @@
                 let x = e.offsetX / display.currentCSSZoom | 0;
                 let y = e.offsetY / display.currentCSSZoom | 0;
                 
-                // Adjust coordinates if canvas is rotated
+                // Transform coordinates if canvas is rotated
                 if (canvasRotated) {
-                    const temp = x;
-                    x = y;
-                    y = screenCtx.canvas.width - temp;
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
                 }
 
                 evtQueue.queueEvent({
@@ -339,11 +374,12 @@
                 let x = e.offsetX / display.currentCSSZoom | 0;
                 let y = e.offsetY / display.currentCSSZoom | 0;
                 
-                // Adjust coordinates if canvas is rotated
+                // Transform coordinates if canvas is rotated
                 if (canvasRotated) {
-                    const temp = x;
-                    x = y;
-                    y = screenCtx.canvas.width - temp;
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
                 }
 
                 evtQueue.queueEvent({
@@ -361,10 +397,21 @@
 
                 mouseDown = false;
 
+                let x = (e.pageX - display.offsetLeft) / display.currentCSSZoom | 0;
+                let y = (e.pageY - display.offsetTop) / display.currentCSSZoom | 0;
+                
+                // Transform coordinates if canvas is rotated
+                if (canvasRotated) {
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
+                }
+
                 evtQueue.queueEvent({
                     kind: 'pointerreleased',
-                    x: (e.pageX - display.offsetLeft) / display.currentCSSZoom | 0,
-                    y: (e.pageY - display.offsetTop) / display.currentCSSZoom | 0,
+                    x: x,
+                    y: y,
                 });
 
                 e.preventDefault();
@@ -378,11 +425,12 @@
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
                 
-                // Adjust coordinates if canvas is rotated
+                // Transform coordinates if canvas is rotated
                 if (canvasRotated) {
-                    const temp = x;
-                    x = y;
-                    y = screenCtx.canvas.width - temp;
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
                 }
 
                 evtQueue.queueEvent({
@@ -400,11 +448,12 @@
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
                 
-                // Adjust coordinates if canvas is rotated
+                // Transform coordinates if canvas is rotated
                 if (canvasRotated) {
-                    const temp = x;
-                    x = y;
-                    y = screenCtx.canvas.width - temp;
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
                 }
 
                 evtQueue.queueEvent({
@@ -422,11 +471,12 @@
                 let x = (e.changedTouches[0].pageX - display.offsetLeft) / display.currentCSSZoom | 0;
                 let y = (e.changedTouches[0].pageY - display.offsetTop) / display.currentCSSZoom | 0;
                 
-                // Adjust coordinates if canvas is rotated
+                // Transform coordinates if canvas is rotated
                 if (canvasRotated) {
-                    const temp = x;
-                    x = y;
-                    y = screenCtx.canvas.width - temp;
+                    const transformedX = y;
+                    const transformedY = originalGameHeight - x;
+                    x = transformedX;
+                    y = transformedY;
                 }
 
                 evtQueue.queueEvent({
@@ -483,6 +533,30 @@
             }
         }
 
+        // Orientation control function
+        function setOrientation(mode) {
+            // Update button states
+            document.querySelectorAll('.orientation-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${mode}`).classList.add('active');
+            
+            // Set forcePortrait based on mode
+            if (mode === 'auto') {
+                // Auto-detect based on game dimensions (default behavior)
+                forcePortrait = false;
+            } else if (mode === 'portrait') {
+                // Force portrait mode
+                forcePortrait = true;
+            } else if (mode === 'landscape') {
+                // Force landscape mode
+                forcePortrait = false;
+            }
+            
+            // Reload to apply changes
+            if (scaleSet) {
+                location.reload();
+            }
+        }
+
         async function init() {
             document.getElementById("loading").textContent = "Loading CheerpJ...";
 
@@ -531,11 +605,18 @@
                             display.focus();
                         }
                         
-                        // Force portrait mode by swapping dimensions if needed
+                        // Store original game dimensions
+                        originalGameWidth = width;
+                        originalGameHeight = height;
+                        
+                        // Force portrait mode by swapping dimensions if game requests landscape
                         if (forcePortrait && width > height) {
+                            // Game wants landscape (e.g., 320x240), we swap to portrait (240x320)
                             screenCtx.canvas.width = height;
                             screenCtx.canvas.height = width;
                             canvasRotated = true;
+                            
+                            // Rotate canvas visually so it displays correctly
                             display.style.transform = 'rotate(90deg)';
                             display.style.transformOrigin = 'center center';
                         } else {
