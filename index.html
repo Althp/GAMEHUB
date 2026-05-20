@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMEHUB - Jogos J2ME Clássicos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>GAME<span class="highlight">HUB</span></h1>
+                <p class="tagline">Jogos J2ME Clássicos</p>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-page="home">Início</a>
+                <a href="#" class="nav-link" data-page="about">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <h2>Reviva a Era de Ouro dos Jogos Mobile</h2>
+                <p>Jogue seus jogos clássicos de Java diretamente no navegador</p>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div class="container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar jogos..." class="search-input">
+                    <button id="searchBtn" class="search-btn">🔍</button>
+                </div>
+                <div class="filters">
+                    <button class="filter-btn active" data-category="all">Todos</button>
+                    <button class="filter-btn" data-category="action">Ação</button>
+                    <button class="filter-btn" data-category="adventure">Aventura</button>
+                    <button class="filter-btn" data-category="puzzle">Puzzle</button>
+                    <button class="filter-btn" data-category="rpg">RPG</button>
+                    <button class="filter-btn" data-category="sports">Esportes</button>
+                    <button class="filter-btn" data-category="racing">Corrida</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="games-section">
+            <div class="container">
+                <div id="gamesGrid" class="games-grid">
+                    <!-- Games will be injected here by JavaScript -->
+                </div>
+                <div id="noResults" class="no-results hidden">
+                    <p>Nenhum jogo encontrado 😢</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="playerPage" class="player-page">
+        <div class="player-header">
+            <h2 id="playerTitle" class="player-title">Jogo</h2>
+            <button onclick="closePlayer()" class="close-btn">✕ Fechar</button>
+        </div>
+        <div class="player-container">
+            <iframe id="playerFrame" class="player-frame" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="controls-info">
+            <h3>Controles</h3>
+            <div class="controls-grid">
+                <div class="control-item"><span class="control-key">↑↓←→</span> Mover</div>
+                <div class="control-item"><span class="control-key">Enter</span> Ação/OK</div>
+                <div class="control-item"><span class="control-key">F1/Q</span> Soft Key Esq</div>
+                <div class="control-item"><span class="control-key">F2/W</span> Soft Key Dir</div>
+                <div class="control-item"><span class="control-key">0-9</span> Teclado Numérico</div>
+                <div class="control-item"><span class="control-key">Esc</span> Opções/Sair</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 GAMEHUB - Emulador powered by <a href="https://github.com/zb3/freej2me-web" target="_blank">FreeJ2ME</a></p>
+            <p class="disclaimer">Todos os jogos são propriedade de seus respectivos donos</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
